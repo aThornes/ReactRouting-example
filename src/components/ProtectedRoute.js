@@ -4,7 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 import Loading from "./Loading";
 
 const ProtectedRoute = ({ loggedIn: isLoggedIn, loadedIn: isLoadedIn, render: RenderComponent, ...rest }) => {
-
+  console.log("PROTECTED ROUTE. Logged in: ", isLoggedIn);
   return (
     /* Define the route*/
     <Route

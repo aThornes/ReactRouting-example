@@ -16,8 +16,8 @@ class AppRouter extends React.Component {
     constructor(props, context){
     super(props, context);
     this.state={
-      loggedIn: false,
-      loadedIn: true
+      loggedIn: null,
+      loadedIn: false
     }
   }
 
@@ -25,11 +25,23 @@ class AppRouter extends React.Component {
     this.setState({
       loggedIn: true
     })
+    /* push state to local history (of course a real login wouldn't be this simple)*/
+    localStorage.setItem('loggedInState', true);
   }
 
   logoutUser = () => {
     this.setState({
       loggedIn: false
+    })
+    localStorage.setItem('loggedInState', false);
+  }
+
+  componentDidMount(){
+    let loggedState = localStorage.getItem('loggedInState');
+
+    this.setState({
+      loggedIn: loggedState,
+      loadedIn: true
     })
   }
 
@@ -50,7 +62,7 @@ class AppRouter extends React.Component {
     //       </Switch>
     //     </Router>
     // );
-
+    const {loggedIn, loadedIn} = this.state;
     return(
         <Router>
           <Switch>
@@ -58,21 +70,21 @@ class AppRouter extends React.Component {
             {/* Protected route only allows access if you are NOT logged in!*/}
             <ProtectedRoute
             path="/login"
-            loggedIn={this.state.loggedIn}
-            loadedIn={this.state.loadedIn}
+            loggedIn={loggedIn}
+            loadedIn={loadedIn}
             render={ () => <Login loginUser={this.logInUser}/>}
             />
             {/* Private route only allows access if you are logged in!*/}
             <PrivateRoute
             path="/home"
-            loggedIn={this.state.loggedIn}
-            loadedIn={this.state.loadedIn}
+            loggedIn={loggedIn}
+            loadedIn={loadedIn}
             render={ () => <Home logoutUser={this.logoutUser}/>}
             />
             <PrivateRoute
             path="/data"
-            loggedIn={this.state.loggedIn}
-            loadedIn={this.state.loadedIn}
+            loggedIn={loggedIn}
+            loadedIn={loadedIn}
             render={ () => <Data />}
             />
             <Route component={NotFound} />

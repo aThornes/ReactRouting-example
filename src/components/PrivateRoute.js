@@ -4,6 +4,8 @@ import { Route, Redirect } from "react-router-dom";
 import Loading from "./Loading";
 
 const PrivateRoute = ({ loggedIn: isLoggedIn, loadedIn: isLoadedIn, render: RenderComponent, ...rest }) => {
+  let loggedState = isLoggedIn;
+  console.log("PRIVATE ROUTE. Logged in: ", loggedState);
 
   return (
     /* Define the route*/
@@ -17,7 +19,7 @@ const PrivateRoute = ({ loggedIn: isLoggedIn, loadedIn: isLoadedIn, render: Rend
             <Loading />
           ) : (
             /* Page is loaded, however check user is logged in*/
-            !(isLoggedIn) ? (
+            !(loggedState) ? (
               /* User is not logged in, therefore redirect to login screen*/
               <Redirect to={"/login"}/>
             ) : (
