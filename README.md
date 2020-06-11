@@ -1,3 +1,11 @@
+## React Routing
+
+Short example of setting up effective application routing with react-router-dom. Including auth protected routes.
+
+
+
+# -- Build by Create React App --
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
