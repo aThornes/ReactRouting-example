@@ -36,14 +36,15 @@ class AppRouter extends React.Component {
     localStorage.setItem('loggedInState', false);
   }
 
-  componentDidMount(){
-    let loggedState = localStorage.getItem('loggedInState');
+componentDidMount(){
+  let loggedState = (localStorage.getItem('loggedInState') === 'true');
 
-    this.setState({
-      loggedIn: loggedState,
-      loadedIn: true
-    })
-  }
+  this.setState({
+    loggedIn: loggedState,
+    loadedIn: true
+  });
+}
+
 
   render(){
 
